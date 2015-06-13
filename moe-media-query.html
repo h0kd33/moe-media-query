@@ -1,0 +1,69 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-media-query/iron-media-query.html">
+<dom-module id="moe-media-query">
+    <template>
+        <!-- Media Query -->
+        <iron-media-query id="mediaLandscape" query="(max-width:768px) and (orientation:landscape)"></iron-media-query>
+        <iron-media-query id="mediaPortrait" query="(max-width:768px) and (orientation:portrait)"></iron-media-query>
+        <iron-media-query id="mediaDesktop" query="(min-width:769px)"></iron-media-query>
+    </template>
+</dom-module>
+<script>
+Polymer({
+
+    is: 'moe-media-query',
+
+    properties: {
+        querystate: {
+            type: String,
+            notify: true,
+            reflectToAttribute: true
+        }
+    },
+    listeners: {
+        'mediaDesktop.query-matches-changed': 'queryMatchesChanged',
+        'mediaLandscape.query-matches-changed': 'queryMatchesChanged',
+        'mediaPortrait.query-matches-changed': 'queryMatchesChanged'
+    },
+    queryMatchesChanged: function(e) {
+        switch (e.srcElement.id + e.detail.value) {
+            case 'mediaDesktop' + true:
+                this.querystate = "desktop";
+                break;
+            case 'mediaLandscape' + true:
+                this.querystate = "mobile-landscape";
+                break;
+            case 'mediaPortrait' + true:                
+                this.querystate = "mobile-portrait";
+                break;
+        }
+    },
+
+    // Element Lifecycle
+
+    ready: function() {
+        // `ready` is called after all elements have been configured, but
+        // propagates bottom-up. This element's children are ready, but parents
+        // are not.
+        //
+        // This is the point where you should make modifications to the DOM (when
+        // necessary), or kick off any processes the element wants to perform.
+    },
+
+    attached: function() {
+        // `attached` fires once the element and its parents have been inserted
+        // into a document.
+        //
+        // This is a good place to perform any work related to your element's
+        // visual state or active behavior (measuring sizes, beginning animations,
+        // loading resources, etc).
+    },
+
+    detached: function() {
+        // The analog to `attached`, `detached` fires when the element has been
+        // removed from a document.
+        //
+        // Use this to clean up anything you did in `attached`.
+    }
+});
+</script>

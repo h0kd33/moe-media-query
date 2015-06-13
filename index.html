@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="moe-media-query.html">
+</head>
+
+<body>
+    <moe-media-query></moe-media-query>
+    <span></span>
+</body>
+<script>
+window.addEventListener('resize', resized);
+
+function resized() {	
+    var log = document.querySelector('moe-media-query').querystate;
+    document.querySelector('span').innerHTML = log;
+    console.log(log);
+};
+resized();
+</script>
+
+</html>
